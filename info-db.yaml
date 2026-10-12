@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: info-db
-  namespace: todo-app
+  namespace: abdelatif
   labels: { app: info-db }
 spec:
   serviceName: info-db
