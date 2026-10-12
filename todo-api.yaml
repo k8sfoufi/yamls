@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: todo-api
-          image: todo-api:1.0.0
+          image: abdelatifaiteur/todo-todo-api:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
