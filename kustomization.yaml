@@ -1,0 +1,23 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - namespace.yaml
+  - secrets.yaml
+  - todo-db.yaml
+  - info-db.yaml
+  - info-api.yaml
+  - todo-api.yaml
+  - web.yaml
+  - ingress.yaml
+
+# Point the images at your registry, e.g.:
+# images:
+#   - name: todo-api
+#     newName: registry.example.com/todo/todo-api
+#     newTag: "1.0.0"
+#   - name: info-api
+#     newName: registry.example.com/todo/info-api
+#     newTag: "1.0.0"
+#   - name: todo-web
+#     newName: registry.example.com/todo/todo-web
+#     newTag: "1.0.0"

@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: info-db
+  namespace: todo-app
+  labels: { app: info-db }
+spec:
+  serviceName: info-db
+  replicas: 1
+  selector:
+    matchLabels: { app: info-db }
+  template:
+    metadata:
+      labels: { app: info-db }
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:16-alpine
+          ports:
+            - containerPort: 5432
+              name: pg
+          env:
+            - name: POSTGRES_DB
+              value: infodb
+            - name: POSTGRES_USER
+              valueFrom: { secretKeyRef: { name: info-db-secret, key: username } }
+            - name: POSTGRES_PASSWORD
+              valueFrom: { secretKeyRef: { name: info-db-secret, key: password } }
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: info-db
+  namespace: todo-app
+spec:
+  selector: { app: info-db }
+  ports:
+    - port: 5432
+      targetPort: pg
