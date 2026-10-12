@@ -15,7 +15,7 @@ spec:
       containers:
         - name: todo-api
           image: abdelatifaiteur/todo-todo-api:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
               name: http
