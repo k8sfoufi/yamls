@@ -4,7 +4,7 @@ metadata:
   name: todo
   namespace: abdelatif
 spec:
-  ingressClassName: nginx
+  ingressClassName: traefik
   rules:
     - host: todo-app.abdelatif.195.35.2.222.nip.io   # resolves to 127.0.0.1; change to your own domain
       http:
